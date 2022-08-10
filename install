@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DOTFILES=$("pwd") 
+
+# The very first thing to do is to install zsh.
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+rm ~/.zshrc > /dev/null
+ln -sf ${DOTFILES}/zsh/.zshrc ${HOME}/.zshrc
