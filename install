@@ -1,9 +1,22 @@
 #!/bin/bash
 
 DOTFILES=$("pwd") 
+GITDIR="${HOME}/git"
 
-# The very first thing to do is to install zsh.
+echo "The very first thing to do is to install zsh."
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-rm ~/.zshrc > /dev/null
+echo "Symlinking .zshrc"
+rm ${HOME}/.zshrc > /dev/null
 ln -sf ${DOTFILES}/zsh/.zshrc ${HOME}/.zshrc
+
+echo "Symlinking .vimrc"
+ln -sf ${DOTFILES}/vim/.vimrc ${HOME}/.vimrc
+
+echo "Install Znap to manage Zsh plugins."
+rm -rf ${GITDIR}/zsh-snap > /dev/null 
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ${GITDIR}/zsh-snap
+
+echo "Adding znap configuration to .zshrc"
+cat ${DOTFILES}/zsh/zsh-snap/.zshrc >> ${HOME}/.zshrc
+exec $(which zsh) 
