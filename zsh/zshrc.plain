@@ -104,6 +104,3 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-source /Users/sikachev/Developer/github/dotfiles/zsh/zsh-snap/zshrc.config
-source /Users/sikachev/Developer/github/dotfiles/zsh/zshrc.custom
-source /Users/sikachev/.dotfiles

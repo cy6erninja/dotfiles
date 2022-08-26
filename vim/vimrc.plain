@@ -111,4 +111,3 @@ let g:ranger_map_keys = 0
 "
 inoremap <c-b> <Esc>:Lex<cr>:vertical resize 25<cr>
 nnoremap <c-b> <Esc>:Lex<cr>:vertical resize 25<cr>
-source /Users/sikachev/Developer/github/dotfiles/vim/dein.vim

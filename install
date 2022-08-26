@@ -1,5 +1,4 @@
 #!/bin/bash
-
 DOTFILES=$("pwd") 
 GITDIR="${HOME}/git"
 
@@ -8,15 +7,32 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 echo "Symlinking .zshrc"
 rm ${HOME}/.zshrc > /dev/null
+cat ${DOTFILES}/zsh/zshrc.plain > ${DOTFILES}/zsh/.zshrc
 ln -sf ${DOTFILES}/zsh/.zshrc ${HOME}/.zshrc
 
+
 echo "Symlinking .vimrc"
+rm ${HOME}/.vimrc > /dev/null
+cat ${DOTFILES}/vim/vimrc.plain > ${DOTFILES}/vim/.vimrc
 ln -sf ${DOTFILES}/vim/.vimrc ${HOME}/.vimrc
+
+echo "Install Dein.vim (successor of Vundle)"
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein && rm ./installer.sh
+echo "source ${DOTFILES}/vim/dein.vim" >> ${HOME}/.vimrc   
+nvim +dein#install +qall
 
 echo "Install Znap to manage Zsh plugins."
 rm -rf ${GITDIR}/zsh-snap > /dev/null 
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ${GITDIR}/zsh-snap
 
 echo "Adding znap configuration to .zshrc"
-cat ${DOTFILES}/zsh/zsh-snap/.zshrc >> ${HOME}/.zshrc
+echo "source ${DOTFILES}/zsh/zsh-snap/zshrc.config" >> ${HOME}/.zshrc
+
+echo "source ${DOTFILES}/zsh/zshrc.custom" >> ${HOME}/.zshrc
+
+[ ! -f ${HOME}/.dotfiles ] && touch ${HOME}/.dotfiles
+echo "source ${HOME}/.dotfiles" >> ${HOME}/.zshrc
+
 exec $(which zsh) 
+
