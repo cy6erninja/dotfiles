@@ -1,5 +1,5 @@
 #!/bin/bash
-DOTFILES=$("pwd") 
+DOTFILES=$("pwd")
 GITDIR="${HOME}/git"
 
 echo "The very first thing to do is to install zsh."
@@ -10,16 +10,22 @@ rm ${HOME}/.zshrc > /dev/null
 cat ${DOTFILES}/zsh/zshrc.plain > ${DOTFILES}/zsh/.zshrc
 ln -sf ${DOTFILES}/zsh/.zshrc ${HOME}/.zshrc
 
-
 echo "Symlinking .vimrc"
 rm ${HOME}/.vimrc > /dev/null
-cat ${DOTFILES}/vim/vimrc.plain > ${DOTFILES}/vim/.vimrc
+cat ${DOTFILES}/vim/vimrc.main > ${DOTFILES}/vim/.vimrc
 ln -sf ${DOTFILES}/vim/.vimrc ${HOME}/.vimrc
+
+echo "Linking vim plugin configurations..."
+PLUGIN_CONFIGS=$(ls ${DOTFILES}/vim/*.vim)
+echo $PLUGIN_CONFIGS
+for config in $PLUGIN_CONFIGS
+do
+	echo "source $config" >> ${HOME}/.vimrc
+done
 
 echo "Install Dein.vim (successor of Vundle)"
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein && rm ./installer.sh
-echo "source ${DOTFILES}/vim/dein.vim" >> ${HOME}/.vimrc   
 nvim +dein#install +qall
 
 echo "Install Znap to manage Zsh plugins."

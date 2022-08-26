@@ -17,6 +17,20 @@ call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 "call dein#add('Shougo/neosnippet-snippets')
 call dein#add('aserebryakov/vim-todo-lists')
 call dein#add('907th/vim-auto-save')
+call dein#add('sheerun/vim-polyglot')
+
+" Colorschemes Start
+
+call dein#add('kristijanhusak/vim-hybrid-material')
+call dein#add('cocopon/iceberg.vim')
+call dein#add('arcticicestudio/nord-vim')
+call dein#add('sjl/badwolf')
+call dein#add('lifepillar/vim-solarized8')
+call dein#add('scheakur/vim-scheakur')
+call dein#add('Badacadabra/vim-archery')
+
+colorscheme scheakur
+" Colorschemes End
 
 " Required:
 call dein#end()

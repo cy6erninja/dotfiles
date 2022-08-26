@@ -3,14 +3,19 @@ inoremap jk <ESC>
 let mapleader = "'"
 let maplocalleader="\\"
 
-
 syntax on
 set number "Displays line numbers.
 set ignorecase
 set nobackup "Disables backup files. Because they stayed after I finished working with files.
-set hlsearch 
+set hlsearch
 set incsearch
 set noswapfile
+set list " Shows inserted tabs and spaces in vim.
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
 "==============NETRW CONFIG START=====================
 "https://shapeshed.com/vim-netrw/#netrw---the-unloved-directory-browser
@@ -58,8 +63,6 @@ let g:netrw_winsize=15 "15% winsize
 "let g:ale_fix_on_save = 1
 "let g:ale_linters_explicit = 1
 
-"AUTOSAVER
-let g:auto_save = 1
 
 "TYPESCRIPT-VIM config
 "setlocal indentkeys+=0.
